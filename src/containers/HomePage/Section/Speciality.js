@@ -13,32 +13,54 @@ class Speciality extends Component {
             dots: false,
             infinite: true,
             speed: 500,
-            slidesToShow: 1,
+            slidesToShow: 4,
             slidesToScroll: 1
         };
         return (
             <div className='section-speciality'>
-                <div className='speciality-content'>
-                    <Slider {...settings}>
-                        <div>
-                            <h3 className='img-customize'>1</h3>
-                        </div>
-                        <div>
-                            <h3 className='img-customize'>2</h3>
-                        </div>
-                        <div>
-                            <h3 className='img-customize'>3</h3>
-                        </div>
-                        <div>
-                            <h3 className='img-customize'>4</h3>
-                        </div>
-                        <div>
-                            <h3 className='img-customize'>5</h3>
-                        </div>
-                        <div>
-                            <h3 className='img-customize'>6</h3>
-                        </div>
-                    </Slider>
+                <div className='speciality-container'>
+                    <div className='speciality-header'>
+                        <span className='title-section'>Chuyên khoa phổ biến</span>
+                        <button className='btn-section'>xem thêm</button>
+                    </div>
+                    <div className='speciality-body'>
+                        <Slider {...settings}>
+                            <div className='speciality-customize'>
+                                <div className='bg-image' />
+                                <div>Cơ xương khớp 1</div>
+                            </div>
+                            <div>
+                                <div className='speciality-customize'>
+                                    <div className='bg-image' />
+                                    <div>Cơ xương khớp 2</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div className='speciality-customize'>
+                                    <div className='bg-image' />
+                                    <div>Cơ xương khớp 3</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div className='speciality-customize'>
+                                    <div className='bg-image' />
+                                    <div>Cơ xương khớp 4</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div className='speciality-customize'>
+                                    <div className='bg-image' />
+                                    <div>Cơ xương khớp 5</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div className='speciality-customize'>
+                                    <div className='bg-image' />
+                                    <div>Cơ xương khớp 6</div>
+                                </div>
+                            </div>
+                        </Slider>
+                    </div>
                 </div>
             </div>
         );
