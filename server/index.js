@@ -7,6 +7,7 @@ const buildDir = path.join(__dirname, '../build');
 console.log('Using files in ' + buildDir);
 
 const subDir = '/';
+
 const logRequests = false;
 
 if (subDir === '/') {
