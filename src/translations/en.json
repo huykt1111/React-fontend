@@ -49,6 +49,7 @@
         "role": "Role",
         "save": "Save user",
         "choose": "Choose",
-        "image": "Avatar"
+        "image": "Avatar",
+        "edit": "Edit user"
     }
 }
