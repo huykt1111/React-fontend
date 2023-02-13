@@ -4,7 +4,6 @@ import HomeHeader from './HomeHeader';
 import HomeFooter from './HomeFooter';
 import Speciality from './Section/Speciality';
 import MedicalFacility from './Section/MedicalFacility';
-import { FormattedMessage } from 'react-intl';
 import OutStandingDoctor from './Section/OutStandingDoctor';
 import HandBook from './Section/HandBook';
 import About from './Section/About';
