@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Slider from 'react-slick';
+import { FormattedMessage } from 'react-intl';
 import * as actions from '../../../store/actions';
 import { LANGUAGES } from '../../../utils';
 
@@ -33,8 +34,12 @@ class OutStandingDoctor extends Component {
             <div className='section-share section-outstanding-doctor'>
                 <div className='section-container'>
                     <div className='section-header'>
-                        <span className='title-section'>Bác sĩ nổi bật tuần qua</span>
-                        <button className='btn-section'>xem thêm</button>
+                        <span className='title-section'>
+                            <FormattedMessage id="homepage.outstanding-doctor" />
+                        </span>
+                        <button className='btn-section'>
+                            <FormattedMessage id="homepage.more-info" />
+                        </button>
                     </div>
                     <div className='section-body'>
                         <Slider {...this.props.settings}>

@@ -4,6 +4,7 @@ import HomeHeader from './HomeHeader';
 import HomeFooter from './HomeFooter';
 import Speciality from './Section/Speciality';
 import MedicalFacility from './Section/MedicalFacility';
+import { FormattedMessage } from 'react-intl';
 import OutStandingDoctor from './Section/OutStandingDoctor';
 import HandBook from './Section/HandBook';
 import About from './Section/About';
@@ -13,13 +14,18 @@ import './HomePage.scss';
 
 class HomePage extends Component {
 
+    // handleAfterChange = (index, dontAnimate) => {
+
+    // }
+
     render() {
         let settings = {
             dots: false,
-            infinite: true,
+            infinite: false,
             speed: 500,
             slidesToShow: 4,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            // slickGoTo: this.handleAfterChange,
         };
         return (
             <div>
