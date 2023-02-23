@@ -1,54 +1,50 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Slider from 'react-slick';
+import { getAllSpecialty } from '../../../services/userService';
+import { LANGUAGES } from '../../../utils';
+import { FormattedMessage } from 'react-intl';
 
 class Speciality extends Component {
 
-    render() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dataSpecially: []
+        }
+    }
 
+    async componentDidMount() {
+        let res = await getAllSpecialty();
+        if (res && res.errCode === 0) {
+            this.setState({
+                dataSpecially: res.data ? res.data : []
+            })
+        }
+    }
+
+    render() {
+        let { dataSpecially } = this.state;
         return (
             <div className='section-share section-speciality'>
                 <div className='section-container'>
                     <div className='section-header'>
-                        <span className='title-section'>Chuyên khoa phổ biến</span>
-                        <button className='btn-section'>xem thêm</button>
+                        <span className='title-section'><FormattedMessage id='homepage.specialty-popular' /></span>
+                        <button className='btn-section'><FormattedMessage id='homepage.more-info' /></button>
                     </div>
                     <div className='section-body'>
                         <Slider {...this.props.settings}>
-                            <div className='section-customize'>
-                                <div className='bg-image section-speciality' />
-                                <div>Cơ xương khớp 1</div>
-                            </div>
-                            <div>
-                                <div className='section-customize'>
-                                    <div className='bg-image section-speciality' />
-                                    <div>Cơ xương khớp 2</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div className='section-customize'>
-                                    <div className='bg-image section-speciality' />
-                                    <div>Cơ xương khớp 3</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div className='section-customize'>
-                                    <div className='bg-image section-speciality' />
-                                    <div>Cơ xương khớp 4</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div className='section-customize'>
-                                    <div className='bg-image section-speciality' />
-                                    <div>Cơ xương khớp 5</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div className='section-customize'>
-                                    <div className='bg-image section-speciality' />
-                                    <div>Cơ xương khớp 6</div>
-                                </div>
-                            </div>
+                            {dataSpecially && dataSpecially.length > 0 && dataSpecially.map((item, index) => {
+                                return (
+                                    <div className='section-customize specialty-child' key={index}>
+                                        <div className='bg-image section-speciality'
+                                            style={{ backgroundImage: `url(${item.image})` }}
+                                        />
+                                        <div className='specialty-name'>{item.name}</div>
+                                    </div>
+                                )
+                            })}
+
                         </Slider>
                     </div>
                 </div>
