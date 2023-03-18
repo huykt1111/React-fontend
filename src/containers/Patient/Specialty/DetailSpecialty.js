@@ -25,6 +25,7 @@ class DetailSpecialty extends Component {
     async componentDidMount() {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let id = this.props.match.params.id;
+
             let res = await getAllDetailSpecialtyById({
                 id: id,
                 location: 'ALL'
@@ -43,17 +44,55 @@ class DetailSpecialty extends Component {
                         })
                     }
                 }
+
+                let dataProvince = resProvince.data;
+                if (dataProvince && dataProvince.length > 0) {
+                    dataProvince.unshift({
+                        createdAt: null,
+                        keyMap: "ALL",
+                        type: "PROVINCE",
+                        valueEn: "All Over Danang",
+                        valueVi: "Khắp Đà Nẵng",
+                    })
+                }
+
                 this.setState({
                     dataDetailSpecialty: res.data,
                     arrDoctorId: arrDoctorId,
-                    listProvince: resProvince.data
+                    listProvince: dataProvince ? dataProvince : []
                 })
             }
         }
     }
 
-    handleOnChangeSelect = (event) => {
+    handleOnChangeSelect = async (event) => {
+        if (this.props.match && this.props.match.params && this.props.match.params.id) {
+            let id = this.props.match.params.id;
+            let location = event.target.value;
 
+            let res = await getAllDetailSpecialtyById({
+                id: id,
+                location: location
+            });
+
+            if (res && res.errCode == 0) {
+                let data = res.data;
+                let arrDoctorId = [];
+                if (data && !_.isEmpty(res.data)) {
+                    let arr = data.doctorSpecialty;
+                    if (arr && arr.length > 0) {
+                        arr.map(item => {
+                            arrDoctorId.push(item.doctorId);
+                        })
+                    }
+                }
+
+                this.setState({
+                    dataDetailSpecialty: res.data,
+                    arrDoctorId: arrDoctorId,
+                })
+            }
+        }
     }
 
 
@@ -72,11 +111,16 @@ class DetailSpecialty extends Component {
             <div className="detail-specialty-container">
                 <HomeHeader />
                 <div className="detail-specialty-body">
-
-
                     <div className='description-specialty'>
                         {dataDetailSpecialty && !_.isEmpty(dataDetailSpecialty) &&
-                            <div div dangerouslySetInnerHTML={{ __html: dataDetailSpecialty.descriptionHtml }}>
+                            <div>
+                                <div className='title-specialty'>
+                                    {dataDetailSpecialty.name}
+                                </div>
+
+                                <div dangerouslySetInnerHTML={{ __html: dataDetailSpecialty.descriptionHtml }}>
+
+                                </div>
 
                             </div>
                         }
@@ -104,6 +148,9 @@ class DetailSpecialty extends Component {
                                             <ProfileDoctor
                                                 doctorId={item}
                                                 isShowDescriptionDoctor={true}
+                                                isShowLinkDetails={true}
+                                                isShowPrice={false}
+
                                             // dataTime={dataTime}
                                             />
                                         </div>
