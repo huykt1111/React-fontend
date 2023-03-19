@@ -54,12 +54,10 @@ export const doctorMenu = [
         name: 'menu.admin.manage-user',
         menus: [
             { //manage doctor's schedule
-                name: 'menu.doctor.manage-schedule',
-                menus: [
-                    {
-                        name: 'menu.doctor.manage-schedule', link: '/doctor/manage-schedule',
-                    }
-                ]
+                name: 'menu.doctor.manage-schedule', link: '/doctor/manage-schedule',
+            },
+            { //Patient management of doctor's examination
+                name: 'menu.doctor.manage-patient', link: '/doctor/manage-patient',
             },
         ]
 
