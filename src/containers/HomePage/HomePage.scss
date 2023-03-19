@@ -72,7 +72,9 @@
                  }
 
                  &.section-medical-facility {
-                     background-image: url('../../assets/medical-facility/lo-go-viet-duc.jpg');
+                     //  background-image: url('../../assets/medical-facility/lo-go-viet-duc.jpg');
+                     background-size: contain;
+                     background-color: white;
                  }
 
                  &.section-outstanding-doctor {
@@ -190,6 +192,18 @@
      cursor: pointer;
 
      .specialty-name {
+         padding: 10px 0;
+
+         &:hover {
+             color: #45c3d2;
+         }
+     }
+ }
+
+ .clinic-child {
+     cursor: pointer;
+
+     .clinic-name {
          padding: 10px 0;
 
          &:hover {
