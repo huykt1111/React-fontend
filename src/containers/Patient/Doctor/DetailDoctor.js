@@ -6,6 +6,8 @@ import './DetailDoctor.scss';
 import { LANGUAGES } from '../../../utils';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorExtraInfor from './DoctorExtraInfor';
+import LikeAndShare from '../SocialPlugin/LikeAndShare';
+import Comment from '../SocialPlugin/Comment';
 
 class DetailDoctor extends Component {
 
@@ -30,6 +32,8 @@ class DetailDoctor extends Component {
                 })
             }
         }
+
+
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -44,6 +48,11 @@ class DetailDoctor extends Component {
             nameVi = `${detailDoctor.positionData.valueVi}, ${detailDoctor.lastName} ${detailDoctor.firstName}`;
             nameEn = `${detailDoctor.positionData.valueEn}, ${detailDoctor.firstName} ${detailDoctor.lastName}`;
         }
+
+        let currentURL = +process.env.REACT_APP_IS_LOCALHOST === 1 ?
+            "https://developers.facebook.com/docs/plugins/" : window.location.href;
+        let currentURLCMD = +process.env.REACT_APP_IS_LOCALHOST === 1 ?
+            "https://developers.facebook.com/docs/plugins/comments#configurator" : window.location.href;
         return (
             <React.Fragment >
                 <HomeHeader isShowBanner={false} />
@@ -64,6 +73,12 @@ class DetailDoctor extends Component {
                                     <span>{detailDoctor.Markdown.description}</span>
 
                                 }
+                                <div className="like-share-plugin">
+                                    <LikeAndShare
+                                        data-href={currentURL}
+                                    />
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -84,7 +99,9 @@ class DetailDoctor extends Component {
 
                     </div>
                     <div className="comment-patient">
-
+                        <Comment
+                            data-href={currentURLCMD}
+                        />
                     </div>
                 </div>
             </React.Fragment>
