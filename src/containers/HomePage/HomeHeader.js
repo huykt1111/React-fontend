@@ -6,6 +6,7 @@ import logo from '../../assets/logo.svg';
 import { LANGUAGES } from '../../utils';
 import { withRouter } from 'react-router';
 import { changeLanguageApp } from '../../store/actions/appActions';
+import * as actions from "../../store/actions";
 
 class HomeHeader extends Component {
 
@@ -20,8 +21,20 @@ class HomeHeader extends Component {
         }
     }
 
+    handleLogout = (processLogout) => {
+        processLogout()
+        this.props.history.push("/login");
+    }
+
+    handleViewLogin = () => {
+        if (this.props.history) {
+            this.props.history.push(`/login`);
+        }
+    }
+
     render() {
         let language = this.props.language;
+        const { isLoggedIn, userInfo, processLogout } = this.props;
         return (
             <React.Fragment>
                 <div className='home-header-container'>
@@ -43,12 +56,37 @@ class HomeHeader extends Component {
                                 <div><b><FormattedMessage id="homeheader.doctor" /></b></div>
                                 <div className='subs-title'><FormattedMessage id="homeheader.choose-doctor" /></div>
                             </div>
-                            <div className='child-center-content'>
+                            {/* <div className='child-center-content'>
                                 <div><b><FormattedMessage id="homeheader.fee" /></b></div>
                                 <div className='subs-title'><FormattedMessage id="homeheader.check-health" /></div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className='right-content'>
+                            {isLoggedIn ?
+                                <div class="dropdown account">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {userInfo && userInfo.user && language === LANGUAGES.VI ?
+                                            <span>{userInfo.user.lastName} {userInfo.user.firstName}</span> :
+                                            <span>{userInfo.user.firstName} {userInfo.user.lastName}</span>
+                                        }
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#"><FormattedMessage id="homeheader.profile" /></a>
+                                        <a class="dropdown-item" href="#"><FormattedMessage id="homeheader.family" /></a>
+                                        <a class="dropdown-item" onClick={() => this.handleLogout(processLogout)}><FormattedMessage id="homeheader.logout" /></a>
+                                    </div>
+                                </div>
+                                :
+                                <div class="dropdown account">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <FormattedMessage id="homeheader.login" />
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" onClick={() => this.handleViewLogin()}><FormattedMessage id="homeheader.login" /></a>
+                                        <a class="dropdown-item"><FormattedMessage id="homeheader.register" /></a>
+                                    </div>
+                                </div>
+                            }
                             <div className='support'>
                                 <i className="far fa-question-circle"></i>
                                 <FormattedMessage id="homeheader.support" />
@@ -143,6 +181,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        processLogout: () => dispatch(actions.processLogout()),
         changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
     };
 };

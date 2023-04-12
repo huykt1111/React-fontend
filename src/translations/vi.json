@@ -9,7 +9,12 @@
         "fee": "Gói khám",
         "check-health": "Khám sức khỏe tổng quát",
         "support": "Hỗ trợ",
-        "welcome": "Xin chào, "
+        "welcome": "Xin chào, ",
+        "profile": "Hồ sơ cá nhân",
+        "family": "Hồ sơ gia đình",
+        "login": "Đăng nhập",
+        "logout": "Đăng xuất",
+        "register": "Đăng kí"
     },
     "banner": {
         "title-1": "Nền tảng y tế",

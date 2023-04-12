@@ -34,9 +34,9 @@
         }
 
         .center-content {
-            width: 55%;
+            width: 50%;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
             align-items: center;
 
             .child-center-content {
@@ -50,13 +50,21 @@
         }
 
         .right-content {
-            width: 25%;
+            width: 30%;
             display: flex;
             justify-content: flex-end;
             align-items: center;
 
+            .account {
+                padding-right: 30px;
+            }
+
+            .dropdown-toggle::after {
+                margin-left: 10px;
+            }
+
             .support {
-                padding-right: 50px;
+                padding-right: 30px;
                 display: flex;
                 cursor: pointer;
                 align-items: center;
