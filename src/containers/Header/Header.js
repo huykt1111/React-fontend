@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { withRouter } from "react-router";
 import * as actions from "../../store/actions";
 import Navigator from '../../components/Navigator';
 import { adminMenu, doctorMenu } from './menuApp';
@@ -37,6 +37,11 @@ class Header extends Component {
         this.setState({ menuApp: menu });
     }
 
+    handleLogout = (processLogout) => {
+        processLogout()
+        this.props.history.push("/login");
+    }
+
     render() {
         const { processLogout, language, userInfo } = this.props;
         console.log(this.state.menuApp)
@@ -61,7 +66,7 @@ class Header extends Component {
                         EN
                     </span>
                     {/* nút logout */}
-                    <div className="btn btn-logout" onClick={processLogout} title="Log out">
+                    <div className="btn btn-logout" onClick={() => this.handleLogout(processLogout)} title="Log out">
                         <i className="fas fa-sign-out-alt"></i>
                     </div>
                 </div>
@@ -86,4 +91,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
